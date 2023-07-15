@@ -1,0 +1,185 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.About>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "MasterLayout.cshtml";
+    ViewBag.Activepage = "about";
+    var age = DateTime.Now.Year - Model.BirthYear;
+    var yearsExp = DateTime.Now.Year - Model.CareerStartYear;
+    var educations = Model.Descendants<Education>().Where(x => x.IsVisible());
+    var skills = Model.Descendants<Skills>().Where(x => x.IsVisible());
+    var certifications = Model.Descendants<Certification>().Where(x => x.IsVisible());
+    var experiences = Model.Descendants<Experience>().Where(x => x.IsVisible());
+}
+<!-- Page Title Starts -->
+<section class="title-section text-left text-sm-center revealator-slideup revealator-once revealator-delay1">
+    <h1>ABOUT <span>ME</span></h1>
+    <span class="title-bg">Resume</span>
+</section>
+<!-- Page Title Ends -->
+<!-- Main Content Starts -->
+<section class="main-content revealator-slideup revealator-once revealator-delay1">
+    <div class="container">
+        <div class="row">
+            <!-- Personal Info Starts -->
+            <div class="col-12 col-lg-5 col-xl-6">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-uppercase custom-title mb-0 ft-wt-600">personal info</h3>
+                    </div>
+                    <div class="col-12 d-block d-sm-none">
+                        <img src="img/img-mobile-light.jpg" class="img-fluid main-img-mobile" alt="my picture" />
+                    </div>
+                    <div class="col-6">
+                        <ul class="about-list list-unstyled open-sans-font">
+                            <li> <span class="title">first name :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">@Model.FirstName</span> </li>
+                            <li> <span class="title">last name :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">@Model.LastName</span> </li>
+                            <li> <span class="title">Age :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">@age Years</span> </li>
+                            <li> <span class="title">langages :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">English, Urdu</span> </li>
+                        </ul>
+                        <a class="button" href="#">
+                            <span class="button-text">Download CV</span>
+                            <span class="button-icon fa fa-download"></span>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <ul class="about-list list-unstyled open-sans-font">
+                            <li> <span class="title">Address :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">@Model.Location</span> </li>
+                            <li> <span class="title">Phone :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">@Model.Phone</span> </li>
+                            <li> <span class="title">Email :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">@Model.Email</span> </li>
+                            <li> <span class="title">Skype :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">@Model.Skype</span> </li>
+                        </ul>
+                        <a class="button" href="@Model.Linkedin">
+                            <span class="button-text">Linkedin</span>
+                            <span class="button-icon fa fa-linkedin"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Personal Info Ends -->
+            <!-- Boxes Starts -->
+            <div class="col-12 col-lg-7 col-xl-6 mt-5 mt-lg-0">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="box-stats with-margin">
+                            <h3 class="poppins-font position-relative">@yearsExp</h3>
+                            <p class="open-sans-font m-0 position-relative text-uppercase">years of <span class="d-block">experience</span></p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="box-stats with-margin">
+                            <h3 class="poppins-font position-relative">@Model.CertificationsCount</h3>
+                            <p class="open-sans-font m-0 position-relative text-uppercase">certifications <span class="d-block"> &amp; diplomas</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Boxes Ends -->
+        </div>
+        <hr class="separator">
+        <!-- Skills Starts -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-uppercase pb-4 pb-sm-5 mb-3 mb-sm-0 text-left text-sm-center custom-title ft-wt-600">My Skills</h3>
+            </div>
+            @{
+                foreach (Umbraco.Web.PublishedModels.Skills item in skills)
+                {
+                    var divClass = "c100 p" + item.Percentage;
+                    <div class="col-6 col-md-3 mb-3 mb-sm-5">
+                        <div class="@divClass">
+                            <span>@item.Percentage%</span>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
+                        <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">@item.SkillName</h6>
+                    </div>
+                }
+            }
+
+        </div>
+        <!-- Skills Ends -->
+        <hr class="separator mt-1">
+        <!-- Experience Starts -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-uppercase pb-5 mb-0 text-left text-sm-center custom-title ft-wt-600">Experience <span>&</span> Education</h3>
+            </div>
+            <div class="col-lg-12 m-15px-tb">
+                <div class="resume-box">
+                    <ul>
+                        @{
+                            foreach (var experience in experiences)
+                            {
+                                <li>
+                                    <div class="icon">
+                                        <i class="fa fa-briefcase"></i>
+                                    </div>
+                                    <span class="time open-sans-font text-uppercase">@experience.Duration</span>
+                                    <h5 class="poppins-font text-uppercase">@experience.Designation <span class="place open-sans-font">@experience.CompanyName</span></h5>
+                                    <p class="open-sans-font">
+                                        @experience.Description
+                                    </p>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Experience Ends -->
+
+        <hr class="separator mt-1">
+        <!-- Education and Certification Starts -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-uppercase pb-5 mb-0 text-left text-sm-center custom-title ft-wt-600">Education <span>&</span> Certifications</h3>
+            </div>
+            <div class="col-lg-6 m-15px-tb">
+                <div class="resume-box">
+                    <ul>
+                        @{
+                            foreach (var education in educations)
+                            {
+                                <li>
+                                    <div class="icon">
+                                        <i class="fa fa-graduation-cap"></i>
+                                    </div>
+                                    <span class="time open-sans-font text-uppercase">@education.CompletionYear</span>
+                                    <h5 class="poppins-font text-uppercase">@education.DegreeName<span class="place open-sans-font">@education.Institute</span></h5>
+                                    <p class="open-sans-font">
+                                        @education.Detail
+                                    </p>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 m-15px-tb">
+                <div class="resume-box">
+                    <ul>
+                        @{
+                            foreach (var education in certifications)
+                            {
+                                <li>
+                                    <div class="icon">
+                                        <i class="fa fa-certificate"></i>
+                                    </div>
+                                    <span class="time open-sans-font text-uppercase">@education.CompletionYear</span>
+                                    <h5 class="poppins-font text-uppercase">@education.DegreeName<span class="place open-sans-font">@education.Institute</span></h5>
+                                    <p class="open-sans-font">
+                                        @education.Detail
+                                    </p>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Education and Certification Ends -->
+    </div>
+</section>
+<!-- Main Content Ends -->

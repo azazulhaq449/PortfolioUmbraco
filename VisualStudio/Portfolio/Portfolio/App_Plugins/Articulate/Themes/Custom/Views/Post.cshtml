@@ -1,0 +1,48 @@
+@using Articulate
+@using Umbraco.Core
+@model Articulate.Models.PostModel
+@{
+    Layout = "Master.cshtml";
+    ViewBag.CssBodyClass = "post-template";
+}
+<!-- Page Title Starts -->
+<section class="title-section text-left text-sm-center revealator-slideup revealator-once revealator-delay1">
+    <h1>my <span>blog</span></h1>
+    <span class="title-bg">posts</span>
+</section>
+<!-- Page Title Ends -->
+<!-- Main Content Starts -->
+<section class="blog-post main-content revealator-slideup revealator-once revealator-delay1">
+    <div class="container">
+        <div class="row">
+            <!-- Article Starts -->
+            <article class="col-12">
+                <!-- Meta Starts -->
+                <div class="meta open-sans-font">
+                    <span style="color: #888"><i class="fa fa-user"></i>@Model.Author.Name</span>
+                    <span class="date" style="color: #888"><i class="fa fa-calendar"></i> @Model.PublishedDate.ToString("dddd, MMMM dd, yyyy")</span>
+                    @Html.ThemedPartial(Model, "PostTags")
+                </div>
+                <!-- Meta Ends -->
+                <!-- Article Content Starts -->
+                <h1 class="text-uppercase text-capitalize">@Model.Name</h1>
+                
+                @if (!Model.CroppedPostImageUrl.IsNullOrWhiteSpace())
+                {
+                    <img class="img-fluid" alt="@Model.Name" src="@Model.CroppedPostImageUrl" />
+                }
+            <div class="blog-excerpt open-sans-font pb-5">
+                @Model.Body
+            </div>
+                <!-- Article Content Ends -->
+                @if (Model.EnableComments)
+                {
+                    @Html.ThemedPartial(Model, "CommentsDisqus")
+                    @*@Html.ThemedPartial(Model, "CommentsFacebook")*@
+                }
+            </article>
+            <!-- Article Ends -->
+        </div>
+    </div>
+</section>
+

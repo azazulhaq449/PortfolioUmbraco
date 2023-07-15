@@ -1,0 +1,65 @@
+@using ClientDependency.Core.Mvc
+@using Articulate;
+@model Articulate.Models.IMasterModel
+@{
+    Layout = null;
+    ViewBag.Activepage = "blog";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@Model.PageTitle</title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Template Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700" rel="stylesheet">
+
+    <!-- Template CSS Files -->
+    <link href="../../../../../Content/css/preloader.min.css" rel="stylesheet">
+    <link href="../../../../../Content/css/circle.css" rel="stylesheet">
+    <link href="../../../../../Content/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../../../Content/css/fm.revealator.jquery.min.css" rel="stylesheet">
+    <link href="../../../../../Content/css/style.css" rel="stylesheet">
+    <link href="../../../../../Content/css/bootstrap.min.css" rel="stylesheet">
+
+    @Html.MetaTags(Model)
+    @Html.SocialMetaTags(Model)
+    @Html.AdvertiseWeblogApi(Model)
+    @Html.RssFeed(Model)
+    @Html.RenderOpenSearch(Model)
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+
+    <!-- CSS Skin File -->
+    <link href="../../../../../Content/css/skins/green.css" rel="stylesheet">
+
+    <!-- Modernizr JS File -->
+    <script src="../../../../../Content/js/modernizr.custom.js"></script>
+</head>
+<body class="@ViewBag.Activepage light">
+
+
+    @Html.Partial("_Navigation")
+
+    @RenderBody()
+
+    <!-- Template JS Files -->
+    <script src="../../../../../Content/js/jquery-3.5.0.min.js"></script>
+    <script src="../../../../../Content/js/styleswitcher.js"></script>
+    <script src="../../../../../Content/js/preloader.min.js"></script>
+    <script src="../../../../../Content/js/fm.revealator.jquery.min.js"></script>
+    <script src="../../../../../Content/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../../../../../Content/js/masonry.pkgd.min.js"></script>
+    <script src="../../../../../Content/js/classie.js"></script>
+    <script src="../../../../../Content/js/cbpGridGallery.js"></script>
+    <script src="../../../../../Content/js/jquery.hoverdir.js"></script>
+    <script src="../../../../../Content/js/popper.min.js"></script>
+    <script src="../../../../../Content/js/bootstrap.js"></script>
+    <script src="../../../../../Content/js/custom.js"></script>
+
+</body>
+</html>

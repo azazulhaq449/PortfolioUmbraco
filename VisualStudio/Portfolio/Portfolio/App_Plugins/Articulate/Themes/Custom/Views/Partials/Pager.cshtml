@@ -1,0 +1,22 @@
+@model Articulate.Models.PagerModel
+
+@if (Model.HasNext || Model.HasPrevious)
+{
+    <!-- Pagination Starts -->
+    <div class="col-12 mt-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mb-0">
+                @if (Model.HasPrevious)
+                {
+                    <li class="page-item"><a class="page-link" href="@Model.PreviousUrl">@(Model.CurrentPageIndex)</a></li>
+
+                }
+                <li class="page-item active"><a class="page-link">@(Model.CurrentPageIndex + 1)</a></li>
+                @if (Model.HasNext)
+                {
+                    <li class="page-item"><a class="page-link" href="@Model.NextUrl">@(Model.CurrentPageIndex + 2)</a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+}

@@ -1,0 +1,10 @@
+@using Articulate
+@model Articulate.Models.IMasterModel
+
+
+<div class="contactform">
+    <form method="get" action="@Url.ArticulateSearchUrl(Model)">
+        <input type="text" name="term" placeholder="Search..." />
+        <button type="submit" class="fa fa-search fa"></button>
+    </form>
+</div>
